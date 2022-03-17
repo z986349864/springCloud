@@ -19,5 +19,4 @@ public class Order implements Serializable {
     private Long userId;
     @TableField(exist = false)
     private User user;
-    //测试一下1 a
 }

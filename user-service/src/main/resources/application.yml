@@ -1,0 +1,85 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/cloud-user?useSSL=false
+      username: root
+      password: root
+  application:
+    name: user-service #服务名
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      username: nacos
+      password: nacos
+      discovery:
+        cluster-name: SH
+  rabbitmq:
+    host: 192.168.1.10
+    port: 5672
+    virtual-host: / #虚拟主机
+    username: itcast
+    password: 123321
+    publisher-returns: true #开启publish-return功能，同样是基于callback机制，不过是定义ReturnCallback
+    publisher-confirm-type: correlated #异步回调，定义ConfirmCallback，MQ返回结果时会回调这个ConfirmCallback
+    template:
+      mandatory: true #定义消息路由失败时的策略。true，则调用ReturnCallback；false：则直接丢弃消息
+  redis:
+    host: 192.168.1.10
+mybatis:
+  type-aliases-package: com.huateng
+  configuration:
+    map-underscore-to-camel-case: true
+# mybatis-plus相关配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  global-config:
+    insert-strategy: not_null
+    update-strategy: not_null
+    id-type: auto #ID自增
+  configuration:
+    # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+    map-underscore-to-camel-case: true
+    # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
+    call-setters-on-nulls: true
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  level:
+    com: debug
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
+feign:
+  httpclient:
+    enabled: true # 支持HttpClient的开关
+    max-connections: 200 # 最大连接数
+    max-connections-per-route: 50 # 单个路径的最大连接数
+seata:
+  registry:  # TC服务注册中心的配置，微服务根据这些信息去注册中心获取tc服务地址
+    type: nacos # 参考tc服务自己的registry.conf中的配置
+    nacos: # tc
+      server-addr: 127.0.0.1:8848
+      namespace: "" #namespace为空，就是默认的public
+      group: DEFAULT_GROUP
+      application: seata-tc-server # tc服务在nacos中的服务名称  *必须与seata的registry.conf一致*
+      username: nacos
+      password: nacos
+  tx-service-group: seata-group # 事务组，根据这个获取tc服务的cluster名称
+  service:
+    vgroup-mapping: # 事务组与TC服务cluster的映射关系
+      seata-group: SH
+  data-source-proxy-mode: AT
+#  config:
+#      type: nacos
+#      nacos:
+#        server-addr: 127.0.0.1:8848
+#        username: nacos
+#        password: nacos
+#        group: SEATA_GROUP
+#        data-id: client.properties
+#eureka:
+# client:
+#   service-url:
+#    defaultZone: http://127.0.0.1:10086/eureka #地址

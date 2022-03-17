@@ -6,9 +6,6 @@ import lombok.ToString;
 
 import java.io.Serializable;
 
-/**
- * 用户信息
- */
 @ToString
 @Data
 @TableName("tb_user")

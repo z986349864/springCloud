@@ -8,6 +8,7 @@ import lombok.ToString;
 import java.beans.Transient;
 import java.io.Serializable;
 
+//order表
 @ToString
 @Data
 @TableName("tb_order")

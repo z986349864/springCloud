@@ -27,11 +27,11 @@ public class RedisHandler implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        List<User> list = userService.list();
-        for (User user : list) {
-            String json = JSONObject.toJSONString(user);
-            redisTemplate.opsForValue().set("user:id:" + user.getId(), json);
-        }
+//        List<User> list = userService.list();
+//        for (User user : list) {
+//            String json = JSONObject.toJSONString(user);
+//            redisTemplate.opsForValue().set("user:id:" + user.getId(), json);
+//        }
 
     }
 }

@@ -13,7 +13,7 @@ import java.io.Serializable;
 @TableName("tb_user")
 public class User implements Serializable{
     private Long id;
-    @NotEmpty(message = "用户名不能为空")
+    @NotEmpty(message = "用户名不能为空",groups = AddUser.class)
     private String username;
     private String address;
 }

@@ -5,10 +5,11 @@ import com.huateng.service.MenuService;
 import com.huateng.service.UserService;
 import com.pojo.Menu;
 import com.pojo.User;
-import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,6 +46,14 @@ public class UserController {
     void delete(@RequestBody User user){
         boolean b = userService.updateById(user);
         System.out.println("用户更新状态========:"+b);
+    }
+    //添加事务，指定步回滚的异常Exception,统一接收的异常配置类可以接收到该信息
+    @Transactional(rollbackFor = Exception.class )
+    @PostMapping("/save")
+    public boolean insert(@Validated @RequestBody User user){
+        boolean save = userService.save(user);
+        System.out.println(1/0);
+        return true;
     }
 
     /**

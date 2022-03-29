@@ -27,7 +27,7 @@ spring:
     template:
       mandatory: true #定义消息路由失败时的策略。true，则调用ReturnCallback；false：则直接丢弃消息
   redis:
-    host: 192.168.1.10
+    host: 127.0.0.1
 mybatis:
   type-aliases-package: com.huateng
   configuration:

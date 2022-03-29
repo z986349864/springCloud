@@ -1,11 +1,12 @@
 package com.huateng.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.pojo.Menu;
-import com.pojo.User;
+import com.pojo.Menu1;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface MenuService extends IService<Menu> {
-    List<Menu> findAll(Menu menu);
+@Service
+public interface MenuService extends IService<Menu1> {
+    List<Menu1> findAll(Menu1 menu);
 }

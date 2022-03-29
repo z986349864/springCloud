@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.huateng.service.MenuService;
 import com.huateng.service.UserService;
 import com.pojo.AddUser;
-import com.pojo.Menu;
+import com.pojo.Menu1;
 import com.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +36,11 @@ public class UserController {
      */
     @GetMapping("/{id}")
     public User queryById(@PathVariable("id") Long id) {
-        String s = redisTemplate.opsForValue().get("user:id:" + id);
+       /* String s = redisTemplate.opsForValue().get("user:id:" + id);
         if(s!=null && !"".equals(s)){
             User user = JSONObject.parseObject(s, User.class);
             return user;
-        }
+        }*/
         return userService.getById(id);
     }
     @PutMapping("/update")
@@ -63,8 +63,8 @@ public class UserController {
      */
 
     @GetMapping("/menu/findTree")
-    public List<Menu> create(@RequestBody(required = false) Menu menu) {
-        List<Menu> list = menuService.findAll(menu);
+    public List<Menu1> create(@RequestBody(required = false) Menu1 menu) {
+        List<Menu1> list = menuService.findAll(menu);
         return list;
     }
 

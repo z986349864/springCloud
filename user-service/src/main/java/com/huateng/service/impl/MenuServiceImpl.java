@@ -1,3 +1,4 @@
+/*
 package com.huateng.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -69,3 +70,4 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper,Menu> implements Men
     }
 
 }
+*/
